@@ -1,0 +1,28 @@
+package com.liangxiaoqiao.leetcode.day.hard;
+
+
+/*
+ * English
+ * id: 736
+ * title: Parse Lisp Expression
+ * href: https://leetcode.com/problems/parse-lisp-expression
+ * desc: You are given a string expression representing a Lisp-like expression to return the integer value of.\nThe syntax for these expressions is given as follows.\nAn expression is either an integer, a let-expression, an add-expression, a mult-expression, or an assigned variable. Expressions always evaluate to a single integer.\n(An integer could be positive or negative.)\nA let-expression takes the form (let v1 e1 v2 e2 ... vn en expr), where let is always the string \"let\", then there are 1 or more pairs of alternating variables and expressions, meaning that the first variable v1 is assigned the value of the expression e1, the second variable v2 is assigned the value of the expression e2, and so on sequentially; and then the value of this let-expression is the value of the expression expr.\nAn add-expression takes the form (add e1 e2) where add is always the string \"add\", there are always two expressions e1, e2, and this expression evaluates to the addition of the evaluation of e1 and the evaluation of e2.\nA mult-expression takes the form (mult e1 e2) where mult is always the string \"mult\", there are always two expressions e1, e2, and this expression evaluates to the multiplication of the evaluation of e1 and the evaluation of e2.\nFor the purposes of this question, we will use a smaller subset of variable names. A variable starts with a lowercase letter, then zero or more lowercase letters or digits. Additionally for your convenience, the names \"add\", \"let\", or \"mult\" are protected and will never be used as variable names.\nFinally, there is the concept of scope. When an expression of a variable name is evaluated, within the context of that evaluation, the innermost scope (in terms of parentheses) is checked first for the value of that variable, and then outer scopes are checked sequentially. It is guaranteed that every expression is legal. Please see the examples for more details on scope.\nEvaluation Examples:\nInput: (add 1 2)\nOutput: 3\n\nInput: (mult 3 (add 2 3))\nOutput: 15\n\nInput: (let x 2 (mult x 5))\nOutput: 10\n\nInput: (let x 2 (mult x (let x 3 y 4 (add x y))))\nOutput: 14\nExplanation: In the expression (add x y), when checking for the value of the variable x,\nwe check from the innermost scope to the outermost in the context of the variable we are trying to evaluate.\nSince x = 3 is found first, the value of x is 3.\n\nInput: (let x 3 x 2 x)\nOutput: 2\nExplanation: Assignment in let statements is processed sequentially.\n\nInput: (let x 1 y 2 x (add x y) (add x y))\nOutput: 5\nExplanation: The first (add x y) evaluates as 3, and is assigned to x.\nThe second (add x y) evaluates as 3+2 = 5.\n\nInput: (let x 2 (add (let x 3 (let x 4 x)) x))\nOutput: 6\nExplanation: Even though (let x 4 x) has a deeper scope, it is outside the context\nof the final x in the add-expression.  That final x will equal 2.\n\nInput: (let a1 3 b2 (add a1 1) b2) \nOutput 4\nExplanation: Variable names can contain digits after the first character.\nNote:\nThe given string expression is well formatted: There are no leading or trailing spaces, there is only a single space separating different components of the string, and no space between adjacent parentheses. The expression is guaranteed to be legal and evaluate to an integer.\nThe length of expression is at most 2000. (It is also non-empty, as that would not be a legal expression.)\nThe answer and all intermediate calculations of that answer are guaranteed to fit in a 32-bit integer.
+ * <p>
+ * 中文
+ * 序号: 736
+ * 标题： Lisp 语法解析
+ * 链接： https://leetcode-cn.com/problems/parse-lisp-expression
+ * 描述： 给定一个类似 Lisp 语句的表达式 expression，求出其计算结果。\n表达式语法如下所示:\n表达式可以为整数，let 语法，add 语法，mult 语法。表达式的结果总是一个整数。\n(整数可以是正整数、负整数、0)\nlet 语法表示为 (let v1 e1 v2 e2 ... vn en expr), 其中 let语法总是以字符串 \"let\"来表示，接下来会跟随一个或多个交替变量或表达式，也就是说，第一个变量 v1被分配为表达式 e1 的值，第二个变量 v2 被分配为表达式 e2 的值，以此类推；最终 let 语法的值为 expr表达式的值。\nadd语法表示为 (add e1 e2)，其中 add 语法总是以字符串 \"add\"来表示，该语法总是有两个表达式e1、e2, 该语法的最终结果是 e1 表达式的值与 e2 表达式的值之和。\nmult语法表示为 (mult e1 e2) ，其中 mult 语法总是以字符串\"mult\"表示， 该语法总是有两个表达式 e1、e2，该语法的最终结果是 e1 表达式的值与 e2 表达式的值之积。\n在该题目中，变量的命名以小写字符开始，之后跟随0个或多个小写字符或数字。为了方便，\"add\"，\"let\"，\"mult\"会被定义为\"关键字\"，不会在表达式的变量命名中出现。\n最后，要说一下范围的概念。在做计算时，需要注意优先级，在最内层(根据括号)的表达式的值应该先计算,然后依次计算外层的表达式。我们将保证每一个测试的表达式都是合法的。有关范围的更多详细信息，请参阅示例。\n  示例:\n输入: (add 1 2)\n输出: 3\n\n输入: (mult 3 (add 2 3))\n输出: 15\n\n输入: (let x 2 (mult x 5))\n输出: 10\n\n输入: (let x 2 (mult x (let x 3 y 4 (add x y))))\n输出: 14\n解释: \n表达式 (add x y), 在获取 x 值时, 我们应当由最内层依次向外计算, 首先遇到了 x=3, 所以此处的 x 值是 3.\n\n\n输入: (let x 3 x 2 x)\n输出: 2\n解释: let 语句中的赋值运算按顺序处理即可\n\n输入: (let x 1 y 2 x (add x y) (add x y))\n输出: 5\n解释: \n第一个 (add x y) 计算结果是 3，并且将此值赋给了 x 。\n第二个 (add x y) 计算结果就是 3+2 = 5 。\n\n输入: (let x 2 (add (let x 3 (let x 4 x)) x))\n输出: 6\n解释: \n(let x 4 x) 中的 x 的作用范围仅在()之内。所以最终做加法操作时，x 的值是 2 。\n\n输入: (let a1 3 b2 (add a1 1) b2) \n输出: 4\n解释: \n变量命名时可以在第一个小写字母后跟随数字.\n  注意:\n我们给定的 expression 表达式都是格式化后的：表达式前后没有多余的空格，表达式的不同部分(关键字、变量、表达式)之间仅使用一个空格分割，并且在相邻括号之间也没有空格。我们给定的表达式均为合法的且最终结果为整数。\n我们给定的表达式长度最多为 2000 (表达式也不会为空，因为那不是一个合法的表达式)。\n最终的结果和中间的计算结果都将是一个 32 位整数。\n
+ * <p>
+ * acceptance: 46.1%
+ * difficulty: Hard
+ * private: False
+ */
+
+
+//TODO init
+public class ParseLispExpression {
+    public int evaluate(String expression) {
+        return 0;
+    }
+}
