@@ -52,6 +52,8 @@ package com.liangxiaoqiao.leetcode.day.easy;
  */
 
 
+import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
+
 //TODO init
 /*
  * Definition for singly-linked list.
@@ -70,13 +72,4 @@ public class LinkedListCycle {
         return false;
     }
 
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
 }

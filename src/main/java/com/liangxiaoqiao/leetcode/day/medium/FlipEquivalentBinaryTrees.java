@@ -1,5 +1,6 @@
 package com.liangxiaoqiao.leetcode.day.medium;
 
+import com.liangxiaoqiao.leetcode.day.pojo.TreeNode;
 
 /*
  * English
@@ -50,18 +51,9 @@ package com.liangxiaoqiao.leetcode.day.medium;
  * }
  */
 
+
 public class FlipEquivalentBinaryTrees {
     public boolean flipEquiv(TreeNode root1, TreeNode root2) {
         return false;
-    }
-
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
     }
 }

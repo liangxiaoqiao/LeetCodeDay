@@ -61,6 +61,8 @@ package com.liangxiaoqiao.leetcode.day.easy;
 
 //TODO init
 
+import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
+
 /*
  * Definition for singly-linked list.
  * public class ListNode {
@@ -78,13 +80,5 @@ public class IntersectionOfTwoLinkedLists {
         return null;
     }
 
-    private class ListNode {
-        int val;
-        ListNode next;
 
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
 }

@@ -1,5 +1,7 @@
 package com.liangxiaoqiao.leetcode.day.medium;
 
+import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
+
 /*
  * English
  * id: 142
@@ -53,6 +55,7 @@ package com.liangxiaoqiao.leetcode.day.medium;
 
 //TODO init
 
+
 /*
  * Definition for singly-linked list.
  * class ListNode {
@@ -70,13 +73,5 @@ public class LinkedListCycleIi {
         return null;
     }
 
-    private class ListNode {
-        int val;
-        ListNode next;
 
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
 }

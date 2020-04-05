@@ -33,6 +33,8 @@ package com.liangxiaoqiao.leetcode.day.medium;
 
 //TODO init
 
+import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
+
 /*
  * Definition for singly-linked list.
  * public class ListNode {
@@ -52,11 +54,6 @@ public class LinkedListRandomNode {
         return 0;
     }
 
-    public class ListNode {
-      int val;
-      ListNode next;
-      ListNode(int x) { val = x; }
-  }
 }
 
 /*

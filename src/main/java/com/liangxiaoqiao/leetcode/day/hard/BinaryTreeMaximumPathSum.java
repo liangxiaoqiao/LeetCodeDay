@@ -83,13 +83,5 @@ public class BinaryTreeMaximumPathSum {
         return 0;
     }
 
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
 
-        TreeNode(int x) {
-            val = x;
-        }
-    }
 }

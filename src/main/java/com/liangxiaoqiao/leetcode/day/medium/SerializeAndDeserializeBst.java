@@ -1,5 +1,6 @@
 package com.liangxiaoqiao.leetcode.day.medium;
 
+import com.liangxiaoqiao.leetcode.day.pojo.TreeNode;
 
 /*
  * English
@@ -28,6 +29,7 @@ package com.liangxiaoqiao.leetcode.day.medium;
 
 //TODO init
 
+
 /*
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -50,15 +52,7 @@ public class SerializeAndDeserializeBst {
     }
 
 
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
 
-        TreeNode(int x) {
-            val = x;
-        }
-    }
 }
 // Your Codec object will be instantiated and called as such:
 // Codec codec = new Codec();

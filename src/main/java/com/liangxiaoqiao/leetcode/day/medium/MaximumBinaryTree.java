@@ -1,5 +1,6 @@
 package com.liangxiaoqiao.leetcode.day.medium;
 
+import com.liangxiaoqiao.leetcode.day.pojo.TreeNode;
 
 /*
  * English
@@ -47,6 +48,7 @@ package com.liangxiaoqiao.leetcode.day.medium;
 
 //TODO init
 
+
 /*
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -61,13 +63,5 @@ public class MaximumBinaryTree {
         return null;
     }
 
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
 
-        TreeNode(int x) {
-            val = x;
-        }
-    }
 }

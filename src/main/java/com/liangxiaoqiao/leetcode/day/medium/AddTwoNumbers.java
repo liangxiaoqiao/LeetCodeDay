@@ -1,6 +1,7 @@
 package com.liangxiaoqiao.leetcode.day.medium;
 
 
+import com.liangxiaoqiao.leetcode.day.easy.LinkedListCycle;
 import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
     
 
@@ -41,7 +42,9 @@ import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
  */
 public class AddTwoNumbers {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        return null;
+        ListNode result = null;
+
+        return result;
     }
 }
 

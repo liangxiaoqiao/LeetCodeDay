@@ -63,6 +63,8 @@ package com.liangxiaoqiao.leetcode.day.easy;
 
 //TODO init
 
+import com.liangxiaoqiao.leetcode.day.pojo.TreeNode;
+
 /*
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -78,14 +80,6 @@ public class SubtreeOfAnotherTree {
     }
 
 
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
 
-        TreeNode(int x) {
-            val = x;
-        }
-    }
 
 }

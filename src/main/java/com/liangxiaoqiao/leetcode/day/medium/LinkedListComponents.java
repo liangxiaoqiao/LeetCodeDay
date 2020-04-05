@@ -1,4 +1,5 @@
 package com.liangxiaoqiao.leetcode.day.medium;
+import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
 
 
 /*
@@ -80,17 +81,11 @@ package com.liangxiaoqiao.leetcode.day.medium;
  * }
  */
 
+
 public class LinkedListComponents {
     public int numComponents(ListNode head, int[] G) {
         return 0;
     }
 
-    private class ListNode {
-        int val;
-        ListNode next;
 
-        ListNode(int x) {
-            val = x;
-        }
-    }
 }
