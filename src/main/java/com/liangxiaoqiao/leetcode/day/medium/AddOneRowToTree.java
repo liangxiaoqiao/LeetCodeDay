@@ -1,8 +1,8 @@
 package com.liangxiaoqiao.leetcode.day.medium;
 
-    
+
 import com.liangxiaoqiao.leetcode.day.pojo.TreeNode;
-        
+
 
 /*
  * English
@@ -134,9 +134,34 @@ import com.liangxiaoqiao.leetcode.day.pojo.TreeNode;
  */
 
 public class AddOneRowToTree {
+
     public TreeNode addOneRow(TreeNode root, int v, int d) {
-        return null;
+        if (d == 1) {
+            TreeNode newRoot = new TreeNode(v);
+            newRoot.left = root;
+            return newRoot;
+        }
+        parseNode(root, v, 1, d);
+        return root;
     }
 
+    private void parseNode(TreeNode root, int v, int i, int d) {
+        if (root == null) {
+            return;
+        }
+        if (i < d - 1) {
+            parseNode(root.left, v, i + 1, d);
+            parseNode(root.right, v, i + 1, d);
+        } else if (i == d - 1) {
+            TreeNode left = root.left;
+            TreeNode right = root.right;
+            TreeNode newNode = new TreeNode(v);
+            newNode.left = left;
+            root.left = newNode;
+            TreeNode newNode2 = new TreeNode(v);
+            newNode2.right = right;
+            root.right = newNode2;
+        }
+    }
 
 }
