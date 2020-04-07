@@ -8,6 +8,7 @@
 ##### To me: Keep doing it, you will be better and better.
 
 #### Solved Problems List :
-ID|Java File|Doc
---|--|--|--
-623|AddOneRowToTree|[]()
+ID|Java File|Doc|Date|
+--|--|--|--|--
+623 | AddOneRowToTree | []() | 2020-04-07
+306 | AdditiveNumber | []() | 2020-04-07
