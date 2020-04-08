@@ -1,6 +1,8 @@
 package com.liangxiaoqiao.leetcode.day.medium
 
 import com.liangxiaoqiao.leetcode.day.pojo.ListNode
+import com.liangxiaoqiao.leetcode.day.util.TreeUtils.sameArray
+import com.liangxiaoqiao.leetcode.day.util.TreeUtils.treeToArray
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -25,9 +27,7 @@ class AddTwoNumbersTest {
         r2.next = r3
 
         val result = target.addTwoNumbers(l1, r1)
-        assertEquals(7, result.`val`)
-        assertEquals(0, result.next.`val`)
-        assertEquals(8, result.next.next.`val`)
+        assertEquals(true, sameArray(arrayOf(7, 0, 8), treeToArray(result)))
     }
 
     @Test
@@ -37,8 +37,6 @@ class AddTwoNumbersTest {
         val r2 = ListNode(9)
         r1.next = r2
         val result = target.addTwoNumbers(l1, r1)
-        assertEquals(0, result.`val`)
-        assertEquals(0, result.next.`val`)
-        assertEquals(1, result.next.next.`val`)
+        assertEquals(true, sameArray(arrayOf(0, 0, 1), treeToArray(result)))
     }
 }

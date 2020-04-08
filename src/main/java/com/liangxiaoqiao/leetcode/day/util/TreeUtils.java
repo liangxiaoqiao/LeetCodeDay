@@ -1,5 +1,6 @@
 package com.liangxiaoqiao.leetcode.day.util;
 
+import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
 import com.liangxiaoqiao.leetcode.day.pojo.TreeNode;
 
 import java.util.ArrayList;
@@ -35,6 +36,16 @@ public class TreeUtils {
             }
         }
         return result.subList(0, lastIndex).toArray();
+    }
+
+    public static Object[] treeToArray(ListNode root) {
+        ListNode start = root;
+        List<Object> result = new ArrayList<>();
+        while (start != null) {
+            result.add(start.val);
+            start = start.next;
+        }
+        return result.toArray();
     }
 
     public static boolean sameArray(Object[] expect, Object[] result) {
