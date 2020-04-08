@@ -33,7 +33,7 @@ class AdditiveNumberTest {
         assertTrue(target.isAdditiveNumber(s7))
 
         val s8 = "198019823962"
-        assertFalse(target.isAdditiveNumber(s8))
+        assertTrue(target.isAdditiveNumber(s8))
     }
 
 }
