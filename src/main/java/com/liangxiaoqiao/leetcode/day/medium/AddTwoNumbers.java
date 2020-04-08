@@ -1,9 +1,9 @@
 package com.liangxiaoqiao.leetcode.day.medium;
 
 
-import com.liangxiaoqiao.leetcode.day.easy.LinkedListCycle;
 import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
-    
+import org.jetbrains.annotations.NotNull;
+
 
 /*
  * English
@@ -29,9 +29,6 @@ import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
  * private: False
  */
 
-
-//TODO init
-
 /*
  * Definition for singly-linked list.
  * public class ListNode {
@@ -41,10 +38,67 @@ import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
  * }
  */
 public class AddTwoNumbers {
+    private boolean bigThan10 = false;
+
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode first = l1;
+        ListNode second = l2;
         ListNode result = null;
+        while (first != null && second != null) {
+            int temp = first.val + second.val + (bigThan10 ? 1 : 0);
+            result = getListNode(result, temp);
+            first = first.next;
+            second = second.next;
+        }
+
+        while (first != null) {
+            int temp = first.val + (bigThan10 ? 1 : 0);
+            result = getListNode(result, temp);
+            first = first.next;
+        }
+
+        while (second != null) {
+            int temp = second.val + (bigThan10 ? 1 : 0);
+            result = getListNode(result, temp);
+            second = second.next;
+        }
+
+        if (bigThan10) {
+            addChild(result, new ListNode(1));
+        }
 
         return result;
     }
+
+    @NotNull
+    private ListNode getListNode(ListNode result, int temp) {
+        if (result == null) {
+            if (temp >= 10) {
+                bigThan10 = true;
+                result = new ListNode(temp - 10);
+            } else {
+                bigThan10 = false;
+                result = new ListNode(temp);
+            }
+        } else {
+            if (temp >= 10) {
+                bigThan10 = true;
+                addChild(result, new ListNode(temp - 10));
+            } else {
+                bigThan10 = false;
+                addChild(result, new ListNode(temp));
+            }
+        }
+        return result;
+    }
+
+    private void addChild(ListNode root, ListNode child) {
+        ListNode parent = root;
+        while (parent.next != null) {
+            parent = parent.next;
+        }
+        parent.next = child;
+    }
+
 }
 
