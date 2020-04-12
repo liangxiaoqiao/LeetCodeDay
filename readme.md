@@ -8,8 +8,9 @@
 ##### To me: Keep doing it, you will be better and better.
 
 #### Solved Problems List :
-ID|Java File|Doc|Date|
---|--|--|--|--
-623 | AddOneRowToTree | []() | 2020-04-07
-306 | AdditiveNumber | []() | 2020-04-07
-2 | AddTwoNumbers | []() | 2020-04-08
+ID|Java File|Doc|Date|Comments|
+--|--|--|--|--|--
+623 | AddOneRowToTree | []() | 2020-04-07|
+306 | AdditiveNumber | []() | 2020-04-07|
+2 | AddTwoNumbers | []() | 2020-04-08|
+472 |ConcatenatedWords| []() | 2020-04-12|Too slow
