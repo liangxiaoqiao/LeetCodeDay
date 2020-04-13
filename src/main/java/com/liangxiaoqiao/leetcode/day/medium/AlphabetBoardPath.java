@@ -55,9 +55,68 @@ package com.liangxiaoqiao.leetcode.day.medium;
  */
 
 
-//TODO init
 public class AlphabetBoardPath {
+
     public String alphabetBoardPath(String target) {
-        return null;
+        StringBuilder sb = new StringBuilder();
+        int[] from = new int[]{0, 0};
+        for (int i = 0; i < target.length(); i++) {
+            char current = target.charAt(i);
+            int[] to = getPosition(current);
+            String temp = getPath(from, to);
+            sb.append(temp);
+            String print = "!";
+            sb.append(print);
+            from = to;
+        }
+        return sb.toString();
+    }
+
+    private String getPath(int[] from, int[] to) {
+        StringBuilder sb = new StringBuilder();
+        int fromRow = from[0];
+        int toRow = to[0];
+        int fromCol = from[1];
+        int toCol = to[1];
+
+        String left = "L";
+        String right = "R";
+        String down = "D";
+        String up = "U";
+        if (fromRow == 5) {
+            pendingLine(sb, fromRow, toRow, down, up);
+            pendingLine(sb, fromCol, toCol, right, left);
+        } else if (toRow == 5) {
+            pendingLine(sb, fromCol, toCol, right, left);
+            pendingLine(sb, fromRow, toRow, down, up);
+        } else {
+            pendingLine(sb, fromRow, toRow, down, up);
+            pendingLine(sb, fromCol, toCol, right, left);
+        }
+
+        return sb.toString();
+    }
+
+    private void pendingLine(StringBuilder sb, int from, int to, String plus, String minus) {
+        int rowDiff = to - from;
+        String rowTemp = getLinePath(rowDiff >= 0 ? plus : minus, rowDiff > 0 ? rowDiff : -rowDiff);
+        sb.append(rowTemp);
+    }
+
+    private String getLinePath(String str, int count) {
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        while (i < count) {
+            sb.append(str);
+            i++;
+        }
+        return sb.toString();
+    }
+
+    private int[] getPosition(char current) {
+        int start = 97;
+        int row = (current - start) / 5;
+        int col = (current - start) % 5;
+        return new int[]{row, col};
     }
 }
