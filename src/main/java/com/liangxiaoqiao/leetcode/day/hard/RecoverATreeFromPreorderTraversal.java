@@ -1,5 +1,11 @@
 package com.liangxiaoqiao.leetcode.day.hard;
 
+import com.liangxiaoqiao.leetcode.day.pojo.TreeNode;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /*
  * English
@@ -52,6 +58,7 @@ package com.liangxiaoqiao.leetcode.day.hard;
 
 //TODO init
 
+
 /*
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -63,9 +70,33 @@ package com.liangxiaoqiao.leetcode.day.hard;
  */
 public class RecoverATreeFromPreorderTraversal {
     public TreeNode recoverFromPreorder(String S) {
+        TreeNode root = new TreeNode(Integer.parseInt(String.valueOf(S.charAt(0))));
+        Map<Integer, List<Integer>> leftMap = new LinkedHashMap<>();
+        Map<Integer, List<Integer>> rightMap = new LinkedHashMap<>();
+        int count = 0;
+        for (int i = 1; i < S.length(); i++) {
+            String temp = String.valueOf(S.charAt(i));
+            if ("-".equals(temp)) {
+                count++;
+            } else {
+                if (i == 1 || count != 1) {
+                    if (leftMap.containsKey(count)) {
+                        leftMap.get(count).add(Integer.parseInt(temp));
+                    } else {
+                        leftMap.put(count, new ArrayList<>());
+                    }
+                } else {
+                    if (rightMap.containsKey(count)) {
+                        rightMap.get(count).add(Integer.parseInt(temp));
+                    } else {
+                        rightMap.put(count, new ArrayList<>());
+                    }
+                }
+            }
+        }
+
+
         return null;
     }
 }
 
-class TreeNode {
-}
