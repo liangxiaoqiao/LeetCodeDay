@@ -1,8 +1,8 @@
 package com.liangxiaoqiao.leetcode.day.medium;
 
-    
+
 import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
-        
+
 /*
  * English
  * id: 445
@@ -39,7 +39,19 @@ import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
  * }
  */
 public class AddTwoNumbersIi {
+
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode first = revert(l1);
+        ListNode second = revert(l2);
+        ListNode added = add(first, second);
+        return revert(added);
+    }
+
+    private ListNode add(ListNode first, ListNode second) {
+        return null;
+    }
+
+    public ListNode revert(ListNode src) {
         return null;
     }
 
