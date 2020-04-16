@@ -25,6 +25,8 @@ import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
  * acceptance: 52.3%
  * difficulty: Medium
  * private: False
+ *
+ *
  */
 
 
@@ -41,18 +43,31 @@ import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
 public class AddTwoNumbersIi {
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode first = revert(l1);
-        ListNode second = revert(l2);
+        ListNode first = revert(l1, l1.next);
+        ListNode second = revert(l2, l2.next);
         ListNode added = add(first, second);
-        return revert(added);
+        return revert(added, added.next);
     }
 
     private ListNode add(ListNode first, ListNode second) {
-        return null;
+        return new AddTwoNumbers().addTwoNumbers(first, second);
     }
 
-    public ListNode revert(ListNode src) {
-        return null;
+    public ListNode revert(ListNode src, ListNode next) {
+        if (src != null && next != null) {
+            if (src.next.equals(next)) {
+                src.next = null;
+            }
+            ListNode nNext = next.next;
+            next.next = src;
+            if (nNext == null) {
+                return next;
+            } else {
+                return revert(next, nNext);
+            }
+        } else {
+            return src;
+        }
     }
 
 
