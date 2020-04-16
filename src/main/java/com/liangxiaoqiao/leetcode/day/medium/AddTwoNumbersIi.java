@@ -1,6 +1,7 @@
 package com.liangxiaoqiao.leetcode.day.medium;
 
 
+import com.liangxiaoqiao.leetcode.day.easy.ReverseLinkedList;
 import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
 
 /*
@@ -43,31 +44,18 @@ import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
 public class AddTwoNumbersIi {
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode first = revert(l1, l1.next);
-        ListNode second = revert(l2, l2.next);
+        ListNode first = reverse(l1);
+        ListNode second = reverse(l2);
         ListNode added = add(first, second);
-        return revert(added, added.next);
+        return reverse(added);
     }
 
     private ListNode add(ListNode first, ListNode second) {
         return new AddTwoNumbers().addTwoNumbers(first, second);
     }
 
-    public ListNode revert(ListNode src, ListNode next) {
-        if (src != null && next != null) {
-            if (src.next.equals(next)) {
-                src.next = null;
-            }
-            ListNode nNext = next.next;
-            next.next = src;
-            if (nNext == null) {
-                return next;
-            } else {
-                return revert(next, nNext);
-            }
-        } else {
-            return src;
-        }
+    public ListNode reverse(ListNode src) {
+        return new ReverseLinkedList().reverseList(src);
     }
 
 

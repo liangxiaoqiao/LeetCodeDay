@@ -1,8 +1,8 @@
 package com.liangxiaoqiao.leetcode.day.easy;
 
-    
+
 import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
-        
+
 
 /*
  * English
@@ -45,9 +45,26 @@ import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
  * }
  */
 public class ReverseLinkedList {
+
     public ListNode reverseList(ListNode head) {
-        return null;
+        return reverse(head, head.next);
     }
 
+    public ListNode reverse(ListNode src, ListNode next) {
+        if (src != null && next != null) {
+            if (src.next.equals(next)) {
+                src.next = null;
+            }
+            ListNode nNext = next.next;
+            next.next = src;
+            if (nNext == null) {
+                return next;
+            } else {
+                return reverse(next, nNext);
+            }
+        } else {
+            return src;
+        }
+    }
 
 }
