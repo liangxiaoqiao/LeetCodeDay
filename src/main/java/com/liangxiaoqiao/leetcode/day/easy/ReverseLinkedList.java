@@ -47,6 +47,9 @@ import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
 public class ReverseLinkedList {
 
     public ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
         return reverse(head, head.next);
     }
 
