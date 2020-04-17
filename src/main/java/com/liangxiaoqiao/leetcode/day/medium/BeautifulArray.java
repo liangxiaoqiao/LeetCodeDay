@@ -44,8 +44,6 @@ package com.liangxiaoqiao.leetcode.day.medium;
  * private: False
  */
 
-
-//TODO init
 public class BeautifulArray {
     public int[] beautifulArray(int N) {
         return null;
