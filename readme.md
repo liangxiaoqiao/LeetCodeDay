@@ -17,4 +17,5 @@ ID|Java File|Doc|Date|Comments|
 1138 |AlphabetBoardPath|[]() |2020-04-13| Need more test cases
 445 | AddTwoNumbersIi| []() |2020-04-16 | Reverse list (copy from 206 and 2)
 206 | ReverseLinkedList |[]() | 2020-04-16| Reverse list 
-504 | Base7 |[]() | 2020-04-19 |
+504 | Base7 |[]() | 2020-04-19 | TODO simple
+38 | CountAndSay|[]()| 2020-04-19| 

@@ -1,14 +1,27 @@
 package com.liangxiaoqiao.leetcode.day.medium;
 
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
     
 /*
  * English
  * id: 22
  * title: Generate Parentheses
  * href: https://leetcode.com/problems/generate-parentheses
- * desc: Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.\nFor example, given n = 3, a solution set is:\n[\n  \"((()))\",\n  \"(()())\",\n  \"(())()\",\n  \"()(())\",\n  \"()()()\"\n]
+ * desc: Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+
+For example, given n = 3, a solution set is:
+
+[
+  "((()))",
+  "(()())",
+  "(())()",
+  "()(())",
+  "()()()"
+]
  * <p>
  * 中文
  * 序号: 22
@@ -24,7 +37,21 @@ import java.util.List;
 
 //TODO init
 public class GenerateParentheses {
+    private Map<Integer, String[]> map = new HashMap<>();
+
     public List<String> generateParenthesis(int n) {
+        String[] first = new String[]{"()"};
+        String[] second = new String[]{"(())", "()()"};
+        if (n == 1) {
+            return Arrays.asList(first);
+        }
+        if (n == 2) {
+            return Arrays.asList(second);
+        }
+        for (int i = 3; i <= n; i++) {
+            int length = 2 * second.length + 1;
+
+        }
         return null;
     }
 }
