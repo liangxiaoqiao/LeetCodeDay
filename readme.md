@@ -19,3 +19,4 @@ ID|Java File|Doc|Date|Comments|
 206 | ReverseLinkedList |[]() | 2020-04-16| Reverse list 
 504 | Base7 |[]() | 2020-04-19 | TODO simple
 38 | CountAndSay|[]()| 2020-04-19| 
+565 | ArrayNesting | []() | 2020-04-20|

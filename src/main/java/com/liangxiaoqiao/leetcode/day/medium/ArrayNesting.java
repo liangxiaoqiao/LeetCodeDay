@@ -1,6 +1,9 @@
 package com.liangxiaoqiao.leetcode.day.medium;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 /*
  * English
  * id: 565
@@ -20,9 +23,55 @@ package com.liangxiaoqiao.leetcode.day.medium;
  */
 
 
-//TODO init
 public class ArrayNesting {
+
     public int arrayNesting(int[] nums) {
-        return 0;
+        int max = 0;
+        Set<Integer> useLess = new HashSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (useLess.contains(i)) {
+                continue;
+            }
+            int count = 1;
+            int value = nums[i];
+            Set<Integer> used = new HashSet<>();
+            used.add(i);
+            while (!used.contains(value) && value <= nums.length) {
+                used.add(value);
+                value = nums[value];
+                count++;
+            }
+            if (count > max) {
+                max = count;
+            }
+            useLess.addAll(used);
+            if (max == nums.length) {
+                return max;
+            }
+        }
+        return max;
+    }
+
+    public int arrayNesting2(int[] nums) {
+        int max = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int value = nums[i];
+            if (value == -1) {
+                continue;
+            }
+            int count = 1;
+            while (value != i && value < nums.length) {
+                if (value == -1) {
+                    break;
+                }
+                nums[i] = -1;
+                value = nums[value];
+                count++;
+            }
+            if (count > max) {
+                max = count;
+            }
+        }
+        return max;
     }
 }
