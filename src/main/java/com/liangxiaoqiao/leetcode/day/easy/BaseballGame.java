@@ -21,8 +21,46 @@ package com.liangxiaoqiao.leetcode.day.easy;
 
 
 import java.util.Arrays;
+import java.util.Stack;
 
 public class BaseballGame {
+    public int calPoints2(String[] ops) {
+        Stack<Integer> stack = new Stack<>();
+        int total = 0;
+
+        for (String op : ops) {
+            switch (op) {
+                case "C": {
+                    int result = stack.pop();
+                    total -= result;
+                    break;
+                }
+                case "D": {
+                    int result = stack.peek() * 2;
+                    stack.push(result);
+                    total += result;
+                    break;
+                }
+                case "+": {
+                    int first = stack.pop();
+                    int second = stack.peek();
+                    int result = first + second;
+                    stack.push(first);
+                    stack.push(result);
+                    total += result;
+                    break;
+                }
+                default: {
+                    int result = Integer.parseInt(op);
+                    stack.push(result);
+                    total += result;
+                    break;
+                }
+            }
+        }
+        return total;
+    }
+
     public int calPoints(String[] ops) {
         for (int i = 1; i < ops.length; i++) {
             if (ops[i].equals("C")) {
