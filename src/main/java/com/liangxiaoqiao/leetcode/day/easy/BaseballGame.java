@@ -20,9 +20,57 @@ package com.liangxiaoqiao.leetcode.day.easy;
  */
 
 
-//TODO init
+import java.util.Arrays;
+
 public class BaseballGame {
     public int calPoints(String[] ops) {
-        return 0;
+        for (int i = 1; i < ops.length; i++) {
+            if (ops[i].equals("C")) {
+                remove(ops, i);
+            } else if (ops[i].equals("D")) {
+                multiPartDouble(ops, i);
+            } else if (ops[i].equals("+")) {
+                plus(ops, i);
+            }
+
+        }
+        return Arrays.stream(ops).mapToInt(t -> t.equals("") ? 0 : Integer.parseInt(t)).sum();
+    }
+
+    private void plus(String[] ops, int index) {
+        String first = "";
+        String second = "";
+        for (int j = index - 1; j >= 0; j--) {
+            if (!ops[j].equals("")) {
+                if (first.equals("")) {
+                    first = ops[j];
+                } else {
+                    second = ops[j];
+                }
+            }
+            if (!first.equals("") && !second.equals("")) {
+                ops[index] = String.valueOf(Integer.parseInt(first) + Integer.parseInt(second));
+                return;
+            }
+        }
+    }
+
+    private void multiPartDouble(String[] ops, int index) {
+        for (int j = index - 1; j >= 0; j--) {
+            if (!ops[j].equals("")) {
+                ops[index] = String.valueOf(Integer.parseInt(ops[j]) * 2);
+                return;
+            }
+        }
+    }
+
+    private void remove(String[] ops, int index) {
+        ops[index] = "";
+        for (int j = index - 1; j >= 0; j--) {
+            if (!ops[j].equals("")) {
+                ops[j] = "";
+                return;
+            }
+        }
     }
 }
