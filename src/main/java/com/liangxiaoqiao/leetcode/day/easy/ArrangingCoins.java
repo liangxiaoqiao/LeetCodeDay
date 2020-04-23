@@ -20,9 +20,14 @@ package com.liangxiaoqiao.leetcode.day.easy;
  */
 
 
-//TODO init
 public class ArrangingCoins {
+
     public int arrangeCoins(int n) {
-        return 0;
+        long start = (long) Math.sqrt(n * 2.0);
+
+        while ((start % 2 == 0 ? start / 2 * (start + 1) : (start + 1) / 2 * start) <= n) {
+            start++;
+        }
+        return (int) (start - 1);
     }
 }
