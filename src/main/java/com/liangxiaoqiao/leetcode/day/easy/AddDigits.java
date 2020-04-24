@@ -20,9 +20,16 @@ package com.liangxiaoqiao.leetcode.day.easy;
  */
 
 
-//TODO init
 public class AddDigits {
+
     public int addDigits(int num) {
-        return 0;
+        if (num < 10) {
+            return num;
+        }
+        int remind = num % 10;
+        int remind2 = (num - remind) / 10;
+
+        int tempResult = remind + remind2;
+        return addDigits(tempResult);
     }
 }

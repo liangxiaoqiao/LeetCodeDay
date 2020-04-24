@@ -22,3 +22,4 @@ ID|Java File|Doc|Date|Comments|
 565 | ArrayNesting | []() | 2020-04-20|
 682 | BaseballGame |[]() | 2020-04-22|
 441 | ArrangingCoins|[]() |2020-04-23|
+258 | AddDigits |[]()|2020-04-24|
