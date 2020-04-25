@@ -57,69 +57,26 @@ public class BoatsToSavePeople {
             return people.length;
         }
         int count = 0;
-        int sum = 0;
-        while (start <= end) {
+        while (start < end) {
             int left = people[start];
             if (left >= limit) {
                 count += (end - start + 1);
                 break;
             }
             int right = people[end];
-            if (sum == 0) {
-                if (start == end) {
-                    count++;
-                    break;
-                }
-                if (left + right > limit) {
-                    end--;
-                    count++;
-                } else if (left + right == limit) {
-                    start++;
-                    end--;
-                    count++;
-                } else {
-                    sum = left + right;
-                    end--;
-                    start++;
-                    if (start > end) {
-                        count++;
-                    }
-                }
+
+            if (left + right > limit) {
+                end--;
+                count++;
             } else {
-                if (start == end) {
-                    if (sum + left > limit) {
-                        count += 2;
-                    } else {
-                        count++;
-                    }
-                    break;
-                }
-                if (sum + left > limit) {
-                    count++;
-                    sum = 0;
-                } else if (sum + left == limit) {
-                    start++;
-                    count++;
-                    sum = 0;
-                } else if (sum + left + right == limit) {
-                    start++;
-                    end--;
-                    count++;
-                    sum = 0;
-                } else if (sum + left + right > limit) {
-                    start++;
-                    count++;
-                    sum = 0;
-                } else {
-                    sum = sum + left;
-                    start++;
-                }
-
-                if (start > end) {
-                    count++;
-                }
+                start++;
+                end--;
+                count++;
             }
+        }
 
+        if (start == end) {
+            count++;
         }
 
         return count == 0 ? 1 : count;
