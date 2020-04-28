@@ -6,6 +6,7 @@ import com.liangxiaoqiao.leetcode.day.pojo.TreeNode;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class TreeUtils {
 
@@ -73,5 +74,31 @@ public class TreeUtils {
             }
         }
         return true;
+    }
+
+    public static TreeNode arrayToTree(Object[] array) {
+        Object[] nodes = Stream.of(array).map(t -> {
+            if (t != null) {
+                return new TreeNode(Integer.parseInt(String.valueOf(t)));
+            }
+            return null;
+        }).toArray();
+
+        for (int i = 0; i < nodes.length; i++) {
+            if (nodes[i] instanceof TreeNode) {
+                int leftIndex = 2 * i + 1;
+                int rightIndex = 2 * i + 2;
+                if (leftIndex < nodes.length) {
+                    Object left = nodes[leftIndex];
+                    ((TreeNode) nodes[i]).left = left instanceof TreeNode ? (TreeNode) left : null;
+                }
+                if (rightIndex < nodes.length) {
+                    Object right = nodes[rightIndex];
+                    ((TreeNode) nodes[i]).right = right instanceof TreeNode ? (TreeNode) right : null;
+                }
+            }
+        }
+
+        return (TreeNode) nodes[0];
     }
 }
