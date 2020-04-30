@@ -25,3 +25,4 @@ ID|Java File|Doc|Date|Comments|
 258 | AddDigits |[]()|2020-04-24|
 881 | BoatsToSavePeople| []()|2020-04-24| Boat limit(2 peoples)
 413 |ArithmeticSlices|[]()|2020-04-28| Not perfect
+859 | BuddyStrings|[]()|2020-04-30 |
