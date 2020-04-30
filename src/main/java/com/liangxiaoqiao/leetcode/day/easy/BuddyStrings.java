@@ -50,34 +50,44 @@ A 和 B 仅由小写字母构成。
  * private: False
  */
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class BuddyStrings {
 
     public boolean buddyStrings(String A, String B) {
         if (A.length() < 2 || B.length() < 2 || A.length() != B.length()) {
             return false;
         }
-        Set<Character> unique = new HashSet<>();
-        int count = 0;
-        int[] diffIndex = new int[3];
-        for (int i = 0; i < A.length() && count <= 2; i++) {
-            unique.add(A.charAt(i));
+        int first = -1;
+        int second = -1;
+        int[] bitArray = new int[26];
+        for (int i = 0; i < A.length(); i++) {
             if (A.charAt(i) != B.charAt(i)) {
-                diffIndex[count] = i;
-                count++;
+                if (first == -1) {
+                    first = i;
+                } else if (second == -1) {
+                    second = i;
+                    if (A.charAt(first) != B.charAt(i) || B.charAt(first) != A.charAt(i)) {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
             }
+            int index = A.charAt(i) - 97;
+            bitArray[index] = bitArray[index] + 1;
         }
 
-        if (count == 0) {
-            return unique.size() != A.length();
+        if (first != -1 && second == -1) {
+            return false;
         }
 
-        if (count == 2) {
-            return A.charAt(diffIndex[0]) == B.charAt(diffIndex[1]) && A.charAt(diffIndex[1]) == B.charAt(diffIndex[0]);
+        if (first == -1) {
+            for (int i1 : bitArray) {
+                if (i1 >= 2) {
+                    return true;
+                }
+            }
+            return false;
         }
-
-        return false;
+        return true;
     }
 }
