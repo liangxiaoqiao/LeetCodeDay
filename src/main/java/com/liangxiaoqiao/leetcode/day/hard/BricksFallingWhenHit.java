@@ -19,10 +19,69 @@ package com.liangxiaoqiao.leetcode.day.hard;
  * private: False
  */
 
-
-//TODO init
 public class BricksFallingWhenHit {
+
     public int[] hitBricks(int[][] grid, int[][] hits) {
-        return null;
+
+        int[] fall = new int[hits.length];
+        int fallIndex = 0;
+        for (int i = 0; i < hits.length; i++) {
+            int[] position = hits[i];
+            int row = position[0];
+            int col = position[1];
+            if (grid[row][col] == 0) {
+                fall[fallIndex++] = 0;
+            } else {
+                grid[row][col] = 0;
+                int count = check(grid);
+                fall[fallIndex++] = count;
+            }
+        }
+        return fall;
     }
+
+    private int check(int[][] grid) {
+        int count = 0;
+        for (int i = 1; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+
+                if (grid[i][j] == 0) {
+                    continue;
+                }
+                boolean notFall = checkLeft(grid, i, j - 1) || checkTop(grid, i - 1, j) || checkRight(grid, i, j + 1);
+                if (!notFall) {
+                    grid[i][j] = 0;
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    private boolean checkLeft(int[][] grid, int i, int j) {
+        if (j < 0 || j >= grid[0].length) {
+            return false;
+        }
+        return grid[i][j] == 1;
+    }
+
+    private boolean checkRight(int[][] grid, int i, int j) {
+        if (j < 0 || j >= grid[0].length) {
+            return false;
+        }
+
+        if (grid[i][j] == 0) {
+            return false;
+        }
+        return checkTop(grid, i - 1, j) || checkRight(grid, i, j + 1);
+    }
+
+    private boolean checkTop(int[][] grid, int i, int j) {
+        if (j < 0 || j >= grid[0].length) {
+            return false;
+        }
+        return grid[i][j] == 1;
+    }
+
+
 }
