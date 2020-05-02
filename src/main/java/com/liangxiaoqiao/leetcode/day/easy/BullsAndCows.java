@@ -20,9 +20,30 @@ package com.liangxiaoqiao.leetcode.day.easy;
  */
 
 
-//TODO init
 public class BullsAndCows {
+
     public String getHint(String secret, String guess) {
-        return null;
+        int same = 0;
+        int[] diff = new int[10];
+        int[] diff2 = new int[10];
+        for (int i = 0; i < secret.length(); i++) {
+            if (secret.charAt(i) == guess.charAt(i)) {
+                same++;
+            } else {
+                int index = secret.charAt(i) - 48;
+                int index2 = guess.charAt(i) - 48;
+                diff[index] = diff[index] + 1;
+                diff2[index2] = diff2[index2] + 1;
+            }
+        }
+
+        int different = 0;
+        for (int i = 0; i < diff.length; i++) {
+            int temp1 = diff[i];
+            int temp2 = diff2[i];
+            different = different + (temp2 > temp1 ? temp1 : temp2);
+        }
+
+        return same + "A" + different + "B";
     }
 }
