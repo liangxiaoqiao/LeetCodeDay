@@ -1,5 +1,9 @@
 package com.liangxiaoqiao.leetcode.day.medium;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /*
  * English
@@ -41,10 +45,51 @@ package com.liangxiaoqiao.leetcode.day.medium;
  * private: False
  */
 
-
-//TODO init
 public class CarFleet {
     public int carFleet(int target, int[] position, int[] speed) {
-        return 0;
+        List<Car> cars = new ArrayList<>();
+        for (int i = 0; i < position.length; i++) {
+            cars.add(new Car(position[i], speed[i], (target - position[i]) / (double) speed[i]));
+        }
+        List<Car> list = cars.stream().sorted(Comparator.comparing(Car::getPosition).reversed()).collect(Collectors.toList());
+        List<Integer> ignores = new ArrayList<>();
+        int count = 0;
+        for (int i = 0; i < list.size(); i++) {
+            if (ignores.contains(i)) {
+                continue;
+            }
+            for (int j = 0; j < list.size(); j++) {
+                if (i == j) {
+                    continue;
+                }
+                if (ignores.contains(j)) {
+                    continue;
+                }
+
+                if (list.get(j).needHours <= list.get(i).needHours) {
+                    ignores.add(j);
+                }
+
+            }
+            count++;
+            ignores.add(i);
+        }
+        return count;
+    }
+
+    class Car {
+        int position;
+        int speed;
+        double needHours;
+
+        public int getPosition() {
+            return position;
+        }
+
+        public Car(int position, int speed, double needHours) {
+            this.position = position;
+            this.speed = speed;
+            this.needHours = needHours;
+        }
     }
 }
