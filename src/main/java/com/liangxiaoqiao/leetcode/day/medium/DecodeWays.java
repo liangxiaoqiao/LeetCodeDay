@@ -38,9 +38,70 @@ package com.liangxiaoqiao.leetcode.day.medium;
  */
 
 
-//TODO init
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
 public class DecodeWays {
+
+    private Map<Integer, Integer> map = new HashMap<>();
+
     public int numDecodings(String s) {
-        return 0;
+        if (s.startsWith("0") || s.contains("00")) {
+            return 0;
+        }
+        if (s.length() <= 1) {
+            return 1;
+        }
+        map.put(0, 0);
+        map.put(1, 1);
+        map.put(2, 2);
+        List<String> results = new LinkedList<>();
+
+        int start = 0;
+        for (int i = 1; i < s.length(); i++) {
+            if (Integer.parseInt(s.substring(i - 1, i + 1)) > 26) {
+                if (s.charAt(i) == '0') {
+                    return 0;
+                }
+                results.add(s.substring(start, i));
+                start = i;
+            }
+        }
+        if (start < s.length()) {
+            results.add(s.substring(start));
+        }
+
+        int total = 1;
+        for (String result : results) {
+            total *= calc(calcLength(result));
+        }
+        return total;
+    }
+
+    private int calcLength(String str) {
+        int length = str.length();
+        boolean isZero = true;
+        for (int i = 0; i < str.length(); i++) {
+            if (isZero && str.charAt(i) == '0') {
+                length -= 2;
+            } else if (str.charAt(i) != '0') {
+                isZero = false;
+            } else {
+                isZero = true;
+                length -= 2;
+            }
+        }
+        return length <= 0 ? 1 : length;
+    }
+
+    private int calc(int i) {
+        if (map.containsKey(i)) {
+            return map.get(i);
+        }
+
+        return calc(i - 2) + calc(i - 1);
+
     }
 }
