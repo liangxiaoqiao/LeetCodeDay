@@ -27,3 +27,4 @@ ID|Java File|Doc|Date|Comments|
 413 |ArithmeticSlices|[]()|2020-04-28| Not perfect
 859 | BuddyStrings|[]()|2020-04-30 |
 299 | BullsAndCows |[]()|2020-05-02 |
+91  |DecodeWays|[]()|2020-05-05| Need simplify

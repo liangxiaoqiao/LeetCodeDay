@@ -54,19 +54,23 @@ public class DecodeWays {
         if (s.length() <= 1) {
             return 1;
         }
-        map.put(0, 0);
-        map.put(1, 1);
-        map.put(2, 2);
+
         List<String> results = new LinkedList<>();
 
         int start = 0;
         for (int i = 1; i < s.length(); i++) {
-            if (Integer.parseInt(s.substring(i - 1, i + 1)) > 26) {
-                if (s.charAt(i) == '0') {
+            if (s.charAt(i) == '0') {
+                if (s.charAt(i - 1) > '2') {
                     return 0;
                 }
-                results.add(s.substring(start, i));
+                results.add(s.substring(start, i - 1));
+                i++;
                 start = i;
+            } else {
+                if (s.charAt(i - 1) > '2' || ((s.charAt(i - 1) == '2' && s.charAt(i) > '6'))) {
+                    results.add(s.substring(start, i));
+                    start = i;
+                }
             }
         }
         if (start < s.length()) {
@@ -75,33 +79,43 @@ public class DecodeWays {
 
         int total = 1;
         for (String result : results) {
-            total *= calc(calcLength(result));
+            int tempLeng = calc(calcLength(result));
+            if (tempLeng == 0) {
+                return 0;
+            }
+            total *= tempLeng;
         }
         return total;
     }
 
     private int calcLength(String str) {
         int length = str.length();
-        boolean isZero = true;
         for (int i = 0; i < str.length(); i++) {
-            if (isZero && str.charAt(i) == '0') {
-                length -= 2;
-            } else if (str.charAt(i) != '0') {
-                isZero = false;
-            } else {
-                isZero = true;
-                length -= 2;
+            if (str.charAt(i) == '0') {
+                length--;
             }
         }
-        return length <= 0 ? 1 : length;
+        return length < 1 ? 1 : length;
     }
 
     private int calc(int i) {
-        if (map.containsKey(i)) {
-            return map.get(i);
+        if (i == 0) {
+            return 0;
+        }
+        if (i == 1) {
+            return 1;
         }
 
-        return calc(i - 2) + calc(i - 1);
+        if (i == 2) {
+            return 2;
+        }
 
+        if (map.containsKey(i)) {
+            return map.get(i);
+        } else {
+            int result = calc(i - 2) + calc(i - 1);
+            map.put(i, result);
+            return result;
+        }
     }
 }
