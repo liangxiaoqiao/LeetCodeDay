@@ -55,47 +55,42 @@ public class DecodeWays {
             return 1;
         }
 
-        List<String> results = new LinkedList<>();
+        s = s.replace("10", " ").replace("20", " ");
+        List<Integer> results = new LinkedList<>();
 
         int start = 0;
-        for (int i = 1; i < s.length(); i++) {
+        for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == '0') {
                 if (s.charAt(i - 1) > '2') {
                     return 0;
                 }
-                results.add(s.substring(start, i - 1));
+                results.add(i - 1 - start);
+                i++;
+                start = i;
+            } else if (s.charAt(i) == ' ') {
+                results.add(i - start > 0 ? i - start : 1);
                 i++;
                 start = i;
             } else {
-                if (s.charAt(i - 1) > '2' || ((s.charAt(i - 1) == '2' && s.charAt(i) > '6'))) {
-                    results.add(s.substring(start, i));
+                if (i > 0 && (s.charAt(i - 1) > '2' || ((s.charAt(i - 1) == '2' && s.charAt(i) > '6')))) {
+                    results.add(i - start);
                     start = i;
                 }
             }
         }
         if (start < s.length()) {
-            results.add(s.substring(start));
+            results.add(s.length() - start);
         }
 
         int total = 1;
-        for (String result : results) {
-            int tempLeng = calc(calcLength(result));
+        for (Integer result : results) {
+            int tempLeng = calc(result);
             if (tempLeng == 0) {
                 return 0;
             }
             total *= tempLeng;
         }
         return total;
-    }
-
-    private int calcLength(String str) {
-        int length = str.length();
-        for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == '0') {
-                length--;
-            }
-        }
-        return length < 1 ? 1 : length;
     }
 
     private int calc(int i) {
