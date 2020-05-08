@@ -28,3 +28,4 @@ ID|Java File|Doc|Date|Comments|
 859 | BuddyStrings|[]()|2020-04-30 |
 299 | BullsAndCows |[]()|2020-05-02 |
 91  |DecodeWays|[]()|2020-05-05| Need simplify
+41 | FirstMissingPositive | 2020-05-08 | Need other solve methods
