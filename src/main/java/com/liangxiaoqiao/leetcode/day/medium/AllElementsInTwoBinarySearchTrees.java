@@ -3,6 +3,7 @@ package com.liangxiaoqiao.leetcode.day.medium;
 
 import com.liangxiaoqiao.leetcode.day.pojo.TreeNode;
 
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -96,7 +97,6 @@ import java.util.List;
  */
 
 
-//TODO init
 /*
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -113,9 +113,44 @@ import java.util.List;
  */
 
 public class AllElementsInTwoBinarySearchTrees {
+
     public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
-        return null;
+        LinkedList<Integer> list1 = new LinkedList<>();
+        LinkedList<Integer> list2 = new LinkedList<>();
+        middleVisit(list1, root1);
+        middleVisit(list2, root2);
+        List<Integer> result = new LinkedList<>();
+
+        while (!list1.isEmpty() && !list2.isEmpty()) {
+            int temp1 = list1.peek();
+            int temp2 = list2.peek();
+            if (temp1 <= temp2) {
+                result.add(temp1);
+                list1.pop();
+            } else {
+                result.add(temp2);
+                list2.pop();
+            }
+        }
+
+        while (!list1.isEmpty()) {
+            result.add(list1.pop());
+        }
+        while (!list2.isEmpty()) {
+            result.add(list2.pop());
+        }
+
+        return result;
     }
 
+
+    private void middleVisit(List<Integer> list, TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        middleVisit(list, root.left);
+        list.add(root.val);
+        middleVisit(list, root.right);
+    }
 
 }

@@ -99,6 +99,6 @@ public class TreeUtils {
             }
         }
 
-        return (TreeNode) nodes[0];
+        return nodes.length < 1 ? null : (TreeNode) nodes[0];
     }
 }
