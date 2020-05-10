@@ -30,3 +30,4 @@ ID|Java File|Doc|Date|Comments|
 91  |DecodeWays|[]()|2020-05-05| Need simplify
 41 | FirstMissingPositive | 2020-05-08 | Need other solve methods
 1305 | AllElementsInTwoBinarySearchTrees| 2020-05-09|
+04.06| SuccessLCCI | 2020-05-10 | Need more fast
