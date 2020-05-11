@@ -31,3 +31,4 @@ ID|Java File|Doc|Date|Comments|
 41 | FirstMissingPositive | 2020-05-08 | Need other solve methods
 1305 | AllElementsInTwoBinarySearchTrees| 2020-05-09|
 04.06| SuccessLCCI | 2020-05-10 | Need more fast
+671 |SecondMinimumNodeInABinaryTree | 2020-05-11 | To do 230 KthSmallestElementInABst
