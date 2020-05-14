@@ -19,10 +19,27 @@ package com.liangxiaoqiao.leetcode.day.medium;
  * private: False
  */
 
-
-//TODO init
 public class BulbSwitcher {
+    //sqrt
     public int bulbSwitch(int n) {
-        return 0;
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            if (calc(i + 1)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private boolean calc(int position) {
+        boolean flag = false;
+        int i = 1;
+        while (i <= position) {
+            if (position % i == 0) {
+                flag = !flag;
+            }
+            i++;
+        }
+        return flag;
     }
 }
