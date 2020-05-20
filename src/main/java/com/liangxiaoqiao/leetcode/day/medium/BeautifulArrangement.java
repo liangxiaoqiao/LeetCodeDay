@@ -20,9 +20,43 @@ package com.liangxiaoqiao.leetcode.day.medium;
  */
 
 
-//TODO init
 public class BeautifulArrangement {
+    private int total = 0;
+
     public int countArrangement(int N) {
-        return 0;
+        int[] arr = new int[N];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = -1;
+        }
+        putValue(arr, 0, 1);
+        return total;
+    }
+
+    public void putValue(int[] arr, int index, int value) {
+        if (value > arr.length) {
+            total++;
+        } else {
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] == -1 && check(arr, index, value)) {
+                    arr[index] = value;
+                    putValue(arr, index + 1, value + 1);
+                    arr[index] = -1;
+                }
+
+            }
+        }
+    }
+
+    private boolean check(int[] arr, int index, int value) {
+        if ((value % (index + 1) != 0 && (index + 1) % value != 0)) {
+            return false;
+        }
+        for (int i = 0; i < index; i++) {
+            int tempIndex = i + 1;
+            if ((arr[index] % tempIndex != 0 && tempIndex % arr[index] != 0)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
