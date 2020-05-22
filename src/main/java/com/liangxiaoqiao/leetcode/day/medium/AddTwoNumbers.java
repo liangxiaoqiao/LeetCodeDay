@@ -2,7 +2,6 @@ package com.liangxiaoqiao.leetcode.day.medium;
 
 
 import com.liangxiaoqiao.leetcode.day.pojo.ListNode;
-import org.jetbrains.annotations.NotNull;
 
 
 /*
@@ -70,7 +69,6 @@ public class AddTwoNumbers {
         return result;
     }
 
-    @NotNull
     private ListNode getListNode(ListNode result, int temp) {
         if (result == null) {
             if (temp >= 10) {
