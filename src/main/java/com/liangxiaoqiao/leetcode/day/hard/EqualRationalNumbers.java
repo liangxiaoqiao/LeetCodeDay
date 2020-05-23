@@ -74,6 +74,74 @@ package com.liangxiaoqiao.leetcode.day.hard;
 
 public class EqualRationalNumbers {
     public boolean isRationalEqual(String S, String T) {
+
         return false;
+    }
+
+    private boolean isSame(Number number1, Number number2) {
+        if (number1.getLength() == number2.getLength()) {
+            if (number1.getN1() != number2.getN1()) {
+                return false;
+            }
+
+            if (number1.getN2().equals(number2.getN2()) && number1.getN3().equals(number2.getN3())) {
+                return true;
+            }
+
+
+        }
+        return false;
+    }
+
+    class Number {
+        private int n1;
+        private String n2 = "";
+        private String n3 = "";
+
+        public int getLength() {
+            int count2 = "".equals(n2) ? 0 : 1;
+            int count3 = "".equals(n3) ? 0 : 1;
+            return 1 + count2 + count3;
+        }
+
+        public int getN1() {
+            return n1;
+        }
+
+        public void setN1(int n1) {
+            this.n1 = n1;
+        }
+
+        public String getN2() {
+            return n2;
+        }
+
+        public void setN2(String n2) {
+            this.n2 = n2;
+        }
+
+        public String getN3() {
+            return n3;
+        }
+
+        public void setN3(String n3) {
+            this.n3 = n3;
+        }
+
+        public Number(String str) {
+            if (str.contains("\\.")) {
+                String s1 = str.substring(0, str.indexOf("\\."));
+                this.n1 = Integer.parseInt(s1);
+                if (str.contains("(")) {
+                    this.n2 = str.substring(str.indexOf("\\.") + 1, str.indexOf("("));
+                    this.n3 = str.substring(str.indexOf("(") + 1);
+                } else {
+                    this.n2 = str.substring(str.indexOf("\\.") + 1);
+                }
+            } else {
+                this.n1 = Integer.parseInt(str);
+            }
+
+        }
     }
 }
