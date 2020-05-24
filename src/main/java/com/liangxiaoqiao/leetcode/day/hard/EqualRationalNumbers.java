@@ -74,26 +74,140 @@ package com.liangxiaoqiao.leetcode.day.hard;
 
 public class EqualRationalNumbers {
     public boolean isRationalEqual(String S, String T) {
-
-        return false;
+        ParseNumber p1 = new ParseNumber(S);
+        ParseNumber p2 = new ParseNumber(T);
+        return isSame(p1, p2);
     }
 
-    private boolean isSame(Number number1, Number number2) {
+    private boolean isSame(ParseNumber number1, ParseNumber number2) {
         if (number1.getLength() == number2.getLength()) {
+            return is1Compare1(number1, number2) || is1Compare1(number2, number1)
+                    || is12Compare2(number1, number2) || is12Compare2(number2, number1)
+                    || is3Compare3(number1, number2) || is3Compare3(number2, number1);
+        } else {
+            return is1Compare12or13or123(number1, number2) || is1Compare12or13or123(number2, number1)
+                    || is2Compare3(number1, number2) || is2Compare3(number2, number1);
+        }
+    }
+
+    private boolean is1Compare1(ParseNumber p1, ParseNumber p2) {
+        return p1.getN1() == p2.getN1();
+    }
+
+    private boolean is12Compare2(ParseNumber number1, ParseNumber number2) {
+        if (!number1.isN12()) {
+            return false;
+        }
+
+        if (!number2.isN12() && !number2.isN13()) {
+            return false;
+        }
+
+        if (number2.isN12()) {
             if (number1.getN1() != number2.getN1()) {
                 return false;
             }
-
-            if (number1.getN2().equals(number2.getN2()) && number1.getN3().equals(number2.getN3())) {
-                return true;
+            if (number1.getN2().length() >= number2.getN2().length()) {
+                String result = number1.getN2().replace(number2.getN2(), "").replace("0", "");
+                return "".equals(result) && number1.getN2().indexOf(number2.getN2()) == 0;
+            } else {
+                String result = number2.getN2().replace(number1.getN2(), "").replace("0", "");
+                return "".equals(result) && number2.getN2().indexOf(number1.getN2()) == 0;
             }
 
-
+        } else if (number2.isN13()) {   // 1 3 位
+            if (number1.getN1() == number2.getN1()) {
+                return isAll(number1.getN2(), "0") && isAll(number2.getN3(), "0");
+            } else {
+                if (number1.getN1() > number2.getN1()) {
+                    return number1.getN1() - number2.getN1() == 1 && isAll(number1.getN2(), "0") && isAll(number2.getN3(), "9");
+                }
+            }
         }
         return false;
     }
 
-    class Number {
+    private boolean is3Compare3(ParseNumber number1, ParseNumber number2) {
+        if (number1.getN1() == number2.getN1()) {
+            if (number1.getN2().equals(number2.getN2())) {
+                if (number1.getN3().equals(number2.getN3())) {
+                    return true;
+                } else {
+                    return isAll(number1.getN3(), number2.getN3()) || isAll(number2.getN3(), number1.getN3());
+                }
+            } else {
+                if (number1.getN3().equals(number2.getN3())) {
+                    return isAll((number1.getN2() + number1.getN3()), number2.getN2())
+                            || isAll((number2.getN2() + number2.getN3()), number1.getN2());
+                } else {
+
+                }
+            }
+
+        } else {
+            if (number1.getN1() > number2.getN1()) {
+                return number1.getN1() - number2.getN1() == 1
+                        && isAll(number1.getN2(), "0") && isAll(number1.getN3(), "0")
+                        && isAll(number2.getN2(), "9") && isAll(number2.getN3(), "9");
+            } else {
+                return number2.getN1() - number1.getN1() == 1
+                        && isAll(number2.getN2(), "0") && isAll(number2.getN3(), "0")
+                        && isAll(number1.getN2(), "9") && isAll(number1.getN3(), "9");
+            }
+        }
+        return false;
+    }
+
+
+    private boolean is1Compare12or13or123(ParseNumber number1, ParseNumber number2) {
+        if (!number1.isN1()) {
+            return false;
+        }
+
+        if (number2.isN1()) {
+            return false;
+        }
+
+        if (number2.isN12()) {
+            return number1.getN1() == number2.getN1() && isAll(number2.getN2(), "0");
+        }
+
+        if ((number2.isN13() || number2.isN123())) {
+            return (number1.getN1() == number2.getN1()
+                    && isAll(number2.getN3(), "0")
+                    && (isAll(number2.getN2(), "0") || isAll(number2.getN2(), "")))
+
+                    || (number1.getN1() - number2.getN1() == 1
+                    && isAll(number2.getN3(), "9")
+                    && (isAll(number2.getN2(), "9") || isAll(number2.getN2(), "")));
+        }
+        return false;
+    }
+
+    private boolean is2Compare3(ParseNumber number1, ParseNumber number2) {
+        if (!number2.isN123()) {
+            return false;
+        }
+        if (number1.isN12()) {
+            boolean f1 = number1.n1 == number2.n1 && number1.n2.equals(number2.n2) && isAll(number2.n2, "0");
+            boolean f2 = number1.n1 == number2.n1 && isAll(number1.n2, "0") && isAll(number2.n2, "0") && isAll(number1.n3, "0");
+            boolean f3 = number1.n1 - number2.n1 == 1 && isAll(number1.n2, "0") && isAll(number2.n2, "9") && isAll(number1.n3, "9");
+            return f1 || f2 || f3;
+        } else if (number1.isN13()) {
+            boolean f1 = number1.n1 == number2.n1 && isAll(number1.n3, number2.n2) && (isAll(number1.n3, number2.n3) || isAll(number2.n3, number1.n3));
+            boolean f2 = number1.n1 - number2.n1 == 1 && isAll(number1.n3, "0") && isAll(number2.n2, "9") && isAll(number2.n3, "9");
+            boolean f3 = number2.n1 - number1.n1 == 1 && isAll(number1.n3, "9") && isAll(number2.n2, "0") && isAll(number2.n3, "0");
+            return f1 || f2 || f3;
+        }
+        return false;
+    }
+
+
+    private boolean isAll(String str, String s) {
+        return "".equals(str.replace(s, ""));
+    }
+
+    class ParseNumber {
         private int n1;
         private String n2 = "";
         private String n3 = "";
@@ -102,6 +216,22 @@ public class EqualRationalNumbers {
             int count2 = "".equals(n2) ? 0 : 1;
             int count3 = "".equals(n3) ? 0 : 1;
             return 1 + count2 + count3;
+        }
+
+        public boolean isN1() {
+            return "".equals(n2) && "".equals(n3);
+        }
+
+        public boolean isN12() {
+            return !"".equals(n2) && "".equals(n3);
+        }
+
+        public boolean isN13() {
+            return !"".equals(n3) && "".equals(n2);
+        }
+
+        public boolean isN123() {
+            return !"".equals(n3) && !"".equals(n2);
         }
 
         public int getN1() {
@@ -128,7 +258,7 @@ public class EqualRationalNumbers {
             this.n3 = n3;
         }
 
-        public Number(String str) {
+        public ParseNumber(String str) {
             if (str.contains("\\.")) {
                 String s1 = str.substring(0, str.indexOf("\\."));
                 this.n1 = Integer.parseInt(s1);
